@@ -88,15 +88,15 @@ def process_query(data, user_query):
         
         # Format the result based on its type
         if isinstance(result, pd.DataFrame):
-            result_str = f"\n{result.head().to_string()}\n...(showing first 5 rows)"
+            result_str = f"\n{result.head(1).to_string()}\n...(showing first row of dataframe)"
         elif isinstance(result, pd.Series):
-            result_str = f"\n{result.head().to_string()}\n...(showing first 5 items)"
+            result_str = f"\n{result.head(1).to_string()}\n...(showing first row of dataframe)"
         elif isinstance(result, np.ndarray):
             result_str = str(result)
         else:
             result_str = str(result)
         
-        ai_response = ai_response.replace(f"[QUERY]{query}[/QUERY]", "Answer: " + result_str)
+        ai_response = ai_response.replace(f"[QUERY]{query}[/QUERY]", result_str)
 
     return ai_response
 
