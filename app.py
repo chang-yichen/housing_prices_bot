@@ -4,6 +4,7 @@ from query_handler import process_query
 import pandas as pd
 import plotly.express as px
 import numpy as np
+from auth import check_password 
 
 def display_data_summary(data):
     """Function to display the data summary and visualizations."""
@@ -111,6 +112,10 @@ def display_sample_qns():
 
 
 def main():
+    # Call the password check at the beginning
+    if not check_password():
+        return  # Exit if the password is incorrect
+    
     st.title("Housing Prices Query App")
 
     # Load the data
